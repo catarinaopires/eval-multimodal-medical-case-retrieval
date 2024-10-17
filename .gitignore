@@ -7,7 +7,6 @@
 */scripts/
 
 *.env
-*.yaml
 
 *.err
 *.out
