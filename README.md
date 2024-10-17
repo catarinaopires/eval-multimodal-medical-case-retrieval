@@ -13,6 +13,8 @@ Then follow the usage instructions [here](src/README.md) to run the code of each
 ![Workflow pipeline of the retrieval system](./docs/pipeline.svg)
 **Workflow pipeline of the retrieval system:** dataset collection and article encoding (step 1), storage and indexing of embeddings (step 2), query encoding (step 3), results fusion (step 4), and retrieval of a final ranked list of results (step 5). The query workflow is turquoise, whereas the articles' workflow is black.
 
+Note: To use LongCLIP, download the checkpoint of the model [LongCLIP-B](https://huggingface.co/BeichenZhang/LongCLIP-B) and place it under `./checkpoints`.
+
 ## Environment Variables
 
 In order to run the project, you need to set all of the following environment variables in a `.env` file:
