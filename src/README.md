@@ -1,4 +1,4 @@
-# [ImageCLEF 2013] Case-based retrieval task
+# [ImageCLEFmed 2013] Case-based retrieval task
 
 ## Pipeline
 
