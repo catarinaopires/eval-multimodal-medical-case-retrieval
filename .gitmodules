@@ -1,0 +1,6 @@
+[submodule "src/trec_eval"]
+	path = src/trec_eval
+	url = git@github.com:usnistgov/trec_eval.git
+[submodule "src/encoder/Long-CLIP"]
+	path = src/encoder/Long-CLIP
+	url = git@github.com:beichenzbc/Long-CLIP.git
