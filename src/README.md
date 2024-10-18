@@ -88,18 +88,20 @@ options:
 Perform similarity search, using FAISS, of topic's embeddings against the pre-computed indexed embeddings of the articles for retrieval. Perform results fusion (CombSUM or CombMAX or CombMNZ), and, create submission run file.
 
 ```
-usage: runs.py [-h] -s S -id ID [-t T] [-a A] -i I {d,i,g}
+usage: runs.py [-h] -s S -id ID [-t T] [-a A] -i I {d,i,g} {combSUM,combMAX,combMNZ}
 
 positional arguments:
-  {d,i,g}     compare with description or images or generated_captions
+  {d,i,g}               compare with description or images or generated_captions
+  {combSUM,combMAX,combMNZ}
+                        results fusion method
 
 options:
-  -h, --help  show this help message and exit
-  -s S        title, abstract, fulltext, image or caption
-  -id ID      ID for the run
-  -t T        topics embeddings .pkl file
-  -a A        articles embeddings .pkl file
-  -i I        index filename
+  -h, --help            show this help message and exit
+  -s S                  title, abstract, fulltext, image or caption
+  -id ID                ID for the run
+  -t T                  topics embeddings .pkl file
+  -a A                  articles embeddings .pkl file
+  -i I                  index filename
 ```
 
 #### Search

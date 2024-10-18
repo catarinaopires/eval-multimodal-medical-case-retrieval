@@ -34,8 +34,7 @@ def find_article_index(list_of_counts, figure_index):
     return -1
 
 
-def results_fusion(results, list_of_counts, df_articles_emb):
-    comb = "combSUM"  # combMAX or combSUM or combMNZ
+def results_fusion(results, fusion_method, list_of_counts, df_articles_emb):
 
     if list_of_counts is None:  # Search item is not images or captions
         results["ann_id"] = results["ann_index"].apply(
@@ -47,17 +46,17 @@ def results_fusion(results, list_of_counts, df_articles_emb):
             lambda x: df_articles_emb.index[find_article_index(list_of_counts, x)]
         )
 
-    if comb == "combMNZ":
+    if fusion_method == "combMNZ":
         results = results.groupby("ann_id", group_keys=False)["distances"].agg(
             ["sum", "count"]
         )
         results["distances"] = results["count"] * results["sum"]
-    elif comb == "combSUM":
+    elif fusion_method == "combSUM":
         results = results.groupby("ann_id", group_keys=False)["distances"].sum()
-    elif comb == "combMAX":
+    elif fusion_method == "combMAX":
         results = results.groupby("ann_id", group_keys=False)["distances"].max()
     else:
-        print("Invalid comb method")
+        print("Invalid fusion_method method")
 
     results = results.reset_index()
     results = results.sort_values(by="distances", ascending=False)
@@ -69,6 +68,7 @@ def results_fusion(results, list_of_counts, df_articles_emb):
 def create_submission_file_images(
     with_topic_generated_caption,
     search_object,
+    fusion_method,
     df_topic_emb,
     df_articles_emb,
     run_id,
@@ -103,13 +103,16 @@ def create_submission_file_images(
                     results = pd.concat([results, single_image_results], join="outer")
 
             # Results fusion
-            results = results_fusion(results, list_of_counts, df_articles_emb)
+            results = results_fusion(
+                results, fusion_method, list_of_counts, df_articles_emb
+            )
 
             write_submission_file(topic_nr, results, run_id, file)
 
 
 def create_submission_file_description(
     search_object,
+    fusion_method,
     df_topic_emb,
     df_articles_emb,
     run_id,
@@ -134,7 +137,9 @@ def create_submission_file_description(
                 )
 
             # Results fusion
-            results = results_fusion(results, list_of_counts, df_articles_emb)
+            results = results_fusion(
+                results, fusion_method, list_of_counts, df_articles_emb
+            )
 
             write_submission_file(topic_nr, results, run_id, file)
 
@@ -163,6 +168,12 @@ def get_args_parser():
         help="title, abstract, fulltext, image or caption",
         type=str,
         required=True,
+    )
+
+    parser.add_argument(
+        "fusion",
+        help="results fusion method",
+        choices=("combSUM", "combMAX", "combMNZ"),
     )
 
     parser.add_argument("-id", help="ID for the run", required=True)
@@ -203,12 +214,19 @@ def main(args):
 
     if args.type == "d":
         create_submission_file_description(
-            args.s, df_topics, df_articles, args.id, args.i, submission_filename
+            args.s,
+            args.fusion,
+            df_topics,
+            df_articles,
+            args.id,
+            args.i,
+            submission_filename,
         )
     elif args.type == "i" or args.type == "g":
         create_submission_file_images(
             args.type == "g",
             args.s,
+            args.fusion,
             df_topics,
             df_articles,
             args.id,
