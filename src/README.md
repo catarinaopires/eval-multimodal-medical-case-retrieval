@@ -114,3 +114,15 @@ options:
   -i I        index path
   -t T        topic number
 ```
+
+### Statistical testing
+
+Perform statistical testing for all metrics on a set of submissions against the corresponding baselines.
+
+Note: `baselines` and `submission_files` lists must be completed with the file names that want to perform the test on. Assuming that baseline and submission files are in the same order so as to perform the test for files at the same index, and that the files are in the `{OUTPUT_DIR_PATH}/submissions/` directory.
+
+```
+python test-all-script.py
+```
+
+Note: Only performing paired sample t-test as `perform_paired_t_test_only` is set to `True` in `complete_statistical_testing` function in `statistical_testing.py`. Change `perform_paired_t_test_only` to `False` if you want to check normality and perform Wilcoxon signed-rank or paired sample t-test according to data normality.

@@ -171,6 +171,7 @@ def interpretation(p_value, alpha=0.05):
 # -----------------------------------
 
 
+# TODO: Change perform_paired_t_test_only if you want to check normality and perform Wilcoxon signed-rank or paired sample t-test according to data normality
 def complete_statistical_testing(
     output1, output2, runid, perform_paired_t_test_only=True
 ):

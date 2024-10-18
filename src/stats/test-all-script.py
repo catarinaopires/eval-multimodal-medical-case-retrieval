@@ -14,21 +14,15 @@ article_sections = ["title", "abstract", "fulltext", "images", "captions"]
 
 
 SUBMISSION_DIR = OUTPUT_DIR_PATH + "submissions/"
-EXPERIMENT_NAME = (
-    "exp1"  # TODO: change according with experiment name given in the submission file
-)
-
-baselines = []  # TODO: Add baseline files here (derived by runs.py script)
-submission_files = []  # TODO: Add submission files here (derived by runs.py script)
 
 
-i = 0
-for submission_file in submission_files:
-    submission_path = os.path.join(SUBMISSION_DIR, submission_file)
-
-    # Single experiment at time
-    if EXPERIMENT_NAME in submission_file:
-        baseline_file = baselines[i]
+def statistical_testing_all_metrics(baselines, submission_files):
+    """
+    Perform statistical testing for all metrics on a set of submissions against the corresponding baselines.
+    Baseline and submission files are expected to be in the same order in order to perform the test for files at the same index.
+    """
+    for baseline_file, submission_file in zip(baselines, submission_files):
+        submission_path = os.path.join(SUBMISSION_DIR, submission_file)
 
         print(
             f"\n** - Running statistical testing for {submission_file} against {baseline_file}"
@@ -51,4 +45,10 @@ for submission_file in submission_files:
                 submission_path.split("/")[-1].split(".")[0] + "_" + metric,
             )
 
-        i += 1
+
+# NOTE: Baseline and submission files are expected to be in the same order so as to perform the test for files at the same index.
+#       Assuming that the baselines and submissions are in the {OUTPUT_DIR_PATH}/submissions/ directory.
+baselines = []  # TODO: Add baseline files here (derived by runs.py script)
+submission_files = []  # TODO: Add submission files here (derived by runs.py script)
+
+statistical_testing_all_metrics(baselines, submission_files)
