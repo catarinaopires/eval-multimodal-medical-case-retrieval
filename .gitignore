@@ -11,5 +11,3 @@
 *.out
 
 */*/stats/results/*
-*/*/scripts/*
-*/*/wandb/*
