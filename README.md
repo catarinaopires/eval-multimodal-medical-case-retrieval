@@ -1,7 +1,5 @@
 # Evaluating dense model-based approaches for Multimodal Medical Case retrieval
 
-This repository contains the code for the paper "Evaluating dense model-based approaches for Multimodal Medical Case retrieval", to be published in the [...]().
-
 ## Installation and Use
 
 1. Import `imageclefenv` environment: `conda env create --file imageclefenv.yaml`

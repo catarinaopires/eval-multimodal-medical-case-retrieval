@@ -1,14 +1,14 @@
 # [ImageCLEFmed 2013](https://www.imageclef.org/2013/medical): Case-based retrieval task
 
 ## Description
-This task was first introduced in 2009. This is a more complex task, but one that we believe is closer to the clinical workflow. <b> In this task, a case description, with patient demographics, limited symptoms and test results including imaging studies, is provided (but not the final diagnosis). The goal is to retrieve cases including images that might best suit the provided case description.</b> Unlike the ad-hoc task, the unit of retrieval here is a case, not an image. For the purposes of this task, a "case" is a PubMed ID corresponding to the journal article (case = [article](data/meta-xml/one-file-per-article/)). In the results submissions the article DOI should be used as several articles do not have PubMed IDs nor Article URLs.
+This task was first introduced in 2009. This is a more complex task, but one that we believe is closer to the clinical workflow. <b> In this task, a case description, with patient demographics, limited symptoms and test results including imaging studies, is provided (but not the final diagnosis). The goal is to retrieve cases including images that might best suit the provided case description.</b> Unlike the ad-hoc task, the unit of retrieval here is a case, not an image. For the purposes of this task, a "case" is a PubMed ID corresponding to the journal article (case = article). In the results submissions the article DOI should be used as several articles do not have PubMed IDs nor Article URLs.
 
-<u> For each [topic](data/case-based-topics.xml), retrieve the [cases](data/meta-xml/one-file-per-article/) including images that might best suit the provided case description. </u>
+<u> For each topic, retrieve the cases including images that might best suit the provided case description. </u>
 
 ## Data
-Database distribution includes an [XML file](data/meta-xml/) and a [compressed file](data/figures/) containing the over 300,000 images of 75'000 articles of the biomedical open access literature.
+Database distribution includes an XML file and a compressed file containing the over 300,000 images of 75,000 articles of the biomedical open access literature.
 
-[30 case-based topics](data/case-based-topics.xml) with [images](data/CaseQueryImages2013/) are provided, where the retrieval unit is a case, not an image.
+30 case-based topics with images are provided, where the retrieval unit is a case, not an image.
 
 ## Submission
 - trec_eval format 
@@ -43,7 +43,7 @@ where:
 - The fifth column is the <u> score assigned by the system </u>.
 - The sixth column is the <u> identifier for the run </u> and should be the same in the entire file.
 
-`{topic_number} {1} {article_DOI} {rank} {score} {run_ID}`
+`{topic_number} 1 {article_DOI} {rank} {score} {run_ID}`
 
 ### Several key points for submitted runs are:
 
