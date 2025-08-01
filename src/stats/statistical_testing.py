@@ -167,7 +167,74 @@ def interpretation(p_value, alpha=0.05):
             "The difference in scores between the two runs is not statistically significant."
         )
 
+def paired_permutation_test(diff, n_resamples=100_000, seed=42, two_tailed=True):
+    """
+    Vectorised paired randomisation (sign-flipping) test.
 
+    Parameters
+    ----------
+    diff : 1-D array-like
+        Per-topic score differences (run_B − run_A).
+    n_resamples : int
+        Number of sign permutations to sample.
+    seed : int or None
+        RNG seed for reproducibility.
+    two_tailed : bool
+        True for a two-tailed test; False for one-tailed (mean(diff) > 0).
+
+    Returns
+    -------
+    p_value : float
+        Monte-Carlo p-value with the +1 correction.
+    """
+    rng   = np.random.default_rng(seed)
+    diff  = np.asarray(diff)
+    obs   = diff.mean()
+
+    # Generate the sign matrix in one shot: shape (n_resamples, n_topics)
+    signs = rng.choice((1, -1), size=(n_resamples, diff.size))
+    perm  = (signs * diff).mean(axis=1)
+
+    if two_tailed:
+        extreme = np.abs(perm) >= abs(obs)
+    else:
+        extreme = perm >= obs
+
+    p_value = (extreme.sum() + 1) / (n_resamples + 1)   # +1 to avoid p = 0
+    return p_value
+
+def perform_paired_permutation_test(data1, data2, n_resamples=100000, seed=42, two_tailed=True):
+    """
+    Perform a paired permutation test on two sets of data.
+
+    Parameters:
+    data1 (array-like): First set of data
+    data2 (array-like): Second set of data
+    n_resamples (int): Number of permutations
+    seed (int): Random seed
+    two_tailed (bool): Whether to perform a two-tailed test
+
+    Returns:
+    obs_mean_diff (float): Observed mean difference
+    p_value (float): Permutation p-value
+    """
+    try:
+        data1 = np.asarray(data1)
+        data2 = np.asarray(data2)
+        if data1.shape != data2.shape:
+            raise ValueError("Input arrays must have the same shape.")
+        
+        diff = data2 - data1
+        p_value = paired_permutation_test(diff, n_resamples=n_resamples, seed=seed, two_tailed=two_tailed)
+
+        print(f"Permutation test p-value: {p_value}")
+
+        return p_value
+
+    except Exception as e:
+        print("Paired permutation test failed:", str(e))
+        return None
+    
 # -----------------------------------
 
 
