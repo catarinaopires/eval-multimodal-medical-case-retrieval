@@ -1,4 +1,8 @@
-# Evaluating dense model-based approaches for Multimodal Medical Case retrieval
+# [Evaluating dense model-based approaches for Multimodal Medical Case retrieval](https://doi.org/10.54195/irrj.19769)
+
+This repository contains the code for the paper ["Evaluating Dense Model-based Approaches for Multimodal Medical Case Retrieval"](https://doi.org/10.54195/irrj.19769), published in Information Retrieval Research Journal ([IRRJ](https://irrj.org/)). 
+
+**Authors:** Catarina Pires, Sérgio Nunes, Luís Filipe Teixeira
 
 ## Installation and Use
 
@@ -53,4 +57,28 @@ data/
 │
 └───qrels/
     │   qrel-2013-case_based.txt
+```
+
+### Acknowledgements
+
+This work was financed by Component 5 - Capitalization and Business Innovation, integrated into the Resilience Dimension of the Recovery and Resilience Plan, within the scope of the Recovery and Resilience Mechanism (MRR) of the European Union  (EU),  framed under  Next  Generation  EU,  for  the  period  2021–2026,  within  the project HfPT (reference 41).  Sérgio Nunes acknowledges the use of computational resources provided  by  the  project  “PTicola  –  Increasing  Computationally  Language  Resources  for Portuguese” (reference https://doi.org/10.54499/CPCA-IAC/AV/594794/2023).
+
+### Citation
+
+Please cite the resource if you use this data.
+
+```
+@article{Pires_Nunes_Teixeira_2025,
+    place={Nijmegen},
+    title={Evaluating Dense Model-based Approaches for Multimodal Medical Case Retrieval},
+    volume={1},
+    url={https://irrj.org/article/view/19769},
+    DOI={10.54195/irrj.19769},
+    number={2},
+    journal={Information Retrieval Research},
+    author={Pires, Catarina and Nunes, Sérgio and Teixeira, Luís Filipe},
+    year={2025},
+    month={Sep.},
+    pages={197–220}
+}
 ```
